@@ -1,0 +1,63 @@
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % python main.py 
+============================
+recommenders/weights/ml-1m/LightGCN/Saved
+Evaluate model with cpp
+no special dataset
+n_users:  1000
+n_items:  3292
+finish loading data
+AbstractModel
+finish loading adjacency matrix
+/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py:280: UserWarning: torch.sparse.SparseTensor(indices, values, shape, *, device=) is deprecated.  Please use torch.sparse_coo_tensor(indices, values, shape, dtype=, device=). (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:607.)
+  return torch.sparse.FloatTensor(index, data, torch.Size(coo.shape))
+Traceback (most recent call last):
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/main.py", line 27, in <module>
+    arena_.excute()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 43, in excute
+    self.load_recommender()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 113, in load_recommender
+    self.model = eval(self.running_model + '(self.saved_args, self.data)') # initialize the model with the graph
+  File "<string>", line 1, in <module>
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/models/LightGCN.py", line 47, in __init__
+    super().__init__(args, data)
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/models/base/abstract_model.py", line 28, in __init__
+    self.Graph = data.getSparseGraph()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py", line 320, in getSparseGraph
+    self.Graph = self.Graph.coalesce().cuda(self.device)
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/torch/cuda/__init__.py", line 289, in _lazy_init
+    raise AssertionError("Torch not compiled with CUDA enabled")
+AssertionError: Torch not compiled with CUDA enabled
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % python main.py --simulation_name MyExp --modeltype MF --n_avatars 10 --max_pages 5 --items_per_page 4 --execution_mode parallel
+============================
+recommenders/weights/ml-1m/MF/Saved
+Evaluate model with cpp
+no special dataset
+n_users:  1000
+n_items:  3292
+finish loading data
+AbstractModel
+finish loading adjacency matrix
+/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py:280: UserWarning: torch.sparse.SparseTensor(indices, values, shape, *, device=) is deprecated.  Please use torch.sparse_coo_tensor(indices, values, shape, dtype=, device=). (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:607.)
+  return torch.sparse.FloatTensor(index, data, torch.Size(coo.shape))
+Traceback (most recent call last):
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/main.py", line 27, in <module>
+    arena_.excute()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 43, in excute
+    self.load_recommender()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 113, in load_recommender
+    self.model = eval(self.running_model + '(self.saved_args, self.data)') # initialize the model with the graph
+  File "<string>", line 1, in <module>
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/models/MF.py", line 45, in __init__
+    super().__init__(args, data)
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/models/base/abstract_model.py", line 28, in __init__
+    self.Graph = data.getSparseGraph()
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py", line 320, in getSparseGraph
+    self.Graph = self.Graph.coalesce().cuda(self.device)
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/torch/cuda/__init__.py", line 289, in _lazy_init
+    raise AssertionError("Torch not compiled with CUDA enabled")
+AssertionError: Torch not compiled with CUDA enabled
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % 
+
+
+
+
