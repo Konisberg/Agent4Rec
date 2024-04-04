@@ -1,0 +1,48 @@
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % python main.py
+Traceback (most recent call last):
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/main.py", line 8, in <module>
+    from simulation.arena import Arena
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/arena.py", line 2, in <module>
+    from simulation.base.abstract_arena import abstract_arena
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 2, in <module>
+    from recommenders.data import Data
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py", line 15, in <module>
+    from reckit import randint_choice
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/__init__.py", line 4, in <module>
+    from .preprocessor import *
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/preprocessor.py", line 9, in <module>
+    from reckit.util import typeassert
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/util/__init__.py", line 1, in <module>
+    from .decorators import *
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/util/decorators.py", line 9, in <module>
+    from collections import Iterable
+ImportError: cannot import name 'Iterable' from 'collections' (/Users/c/anaconda3/lib/python3.10/collections/__init__.py)
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % python main.py --simulation_name MyExp --modeltype MF --n_avatars 10 --max_pages 5 --items_per_page 4 --execution_mode parallel
+Traceback (most recent call last):
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/main.py", line 8, in <module>
+    from simulation.arena import Arena
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/arena.py", line 2, in <module>
+    from simulation.base.abstract_arena import abstract_arena
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/simulation/base/abstract_arena.py", line 2, in <module>
+    from recommenders.data import Data
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/recommenders/data.py", line 15, in <module>
+    from reckit import randint_choice
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/__init__.py", line 4, in <module>
+    from .preprocessor import *
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/preprocessor.py", line 9, in <module>
+    from reckit.util import typeassert
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/util/__init__.py", line 1, in <module>
+    from .decorators import *
+  File "/Users/c/Downloads/my_github_repos/Agent4Rec/Agent4Rec/lib/python3.10/site-packages/reckit/util/decorators.py", line 9, in <module>
+    from collections import Iterable
+ImportError: cannot import name 'Iterable' from 'collections' (/Users/c/anaconda3/lib/python3.10/collections/__init__.py)
+(Agent4Rec) (base) c@cs-MacBook-Pro Agent4Rec % 
+
+
+
+
+
+
+
+
+
