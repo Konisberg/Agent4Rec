@@ -7,17 +7,22 @@ PYTORCH_VERSION="1.13.1+cu117"
 # 安装 Python 和 PyTorch
 function install_python_pytorch {
     echo "---------检查并处理 Python 和 PyTorch 的安装--------"
-    source ~/miniconda3/etc/profile.d/conda.sh  # 确保 conda 命令可用
+    # 确保 Conda 命令可用
+    source ~/miniconda3/etc/profile.d/conda.sh
     conda init bash
     source ~/.bashrc
+    
     echo "当前的 Conda 环境列表："
     conda env list
+    
     echo "是否需要创建新的 Conda 环境？(yes/no)"
     read create_env
+    
     if [ "$create_env" = "yes" ]; then
         echo "输入新环境的名称（默认为 'agent4rec'）："
         read env_name
-        env_name=${env_name:-agent4rec}  # 如果未输入名称，则默认为 'agent4rec'
+        # 如果未输入名称，则默认为 'agent4rec'
+        env_name=${env_name:-agent4rec}
         conda create -n $env_name python=$PYTHON_VERSION -y
         conda activate $env_name
     else
@@ -25,6 +30,8 @@ function install_python_pytorch {
         read env_name
         conda activate $env_name
     fi
+    
+    # 安装 PyTorch 及相关库
     pip install torch==$PYTORCH_VERSION torchvision==0.14.1+cu117 torchaudio==0.13.1 -f https://download.pytorch.org/whl/torch_stable.html
 }
 
@@ -37,7 +44,7 @@ function check_pip {
     else
         echo "pip 未安装。是否现在安装最新版本的 pip？(yes/no)"
         read install_pip
-        if [ "$install_pip" = "yes" ];then
+        if [ "$install_pip" = "yes" ]; then
             if type python > /dev/null 2>&1; then
                 python -m ensurepip
                 pip install --upgrade pip
@@ -50,6 +57,7 @@ function check_pip {
 }
 
 # 执行所有检查和安装
+echo "开始配置环境和安装必要的工具(python, pip, pytorch)..."
 install_python_pytorch
 check_pip
 
