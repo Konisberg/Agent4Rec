@@ -5,31 +5,6 @@ PYTHON_VERSION="3.9.12"
 PYTORCH_VERSION="1.13.1+cu117"
 CUDA_VERSION="11.7"
 
-# 检查当前的 CUDA 版本
-function check_cuda_version {
-    echo "---------检查当前的 CUDA 版本--------"
-    if command -v nvcc > /dev/null 2>&1; then
-        nvcc --version
-    else
-        echo "nvcc 未找到，请检查 CUDA 是否已安装。"
-    fi
-
-    if [ -f /usr/local/cuda/version.txt ]; then
-        echo "CUDA 版本文件内容："
-        cat /usr/local/cuda/version.txt
-    else
-        echo "未找到 CUDA 版本文件。"
-    fi
-
-    if command -v nvidia-smi > /dev/null 2>&1; then
-        nvidia-smi | grep "CUDA Version"
-    else
-        echo "nvidia-smi 未找到，请检查 NVIDIA 驱动是否已安装。"
-    fi
-}
-
-# 执行检查
-check_cuda_version
 
 
 # 安装 Python 和 PyTorch
