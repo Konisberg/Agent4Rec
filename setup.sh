@@ -12,8 +12,18 @@ function install_cuda {
         echo "CUDA $CUDA_VERSION 已安装。"
     else
         echo "安装 CUDA $CUDA_version..."
+        # 使用有效的 CUDA 下载链接
         wget https://developer.download.nvidia.com/compute/cuda/$CUDA_VERSION/local_installers/cuda_$CUDA_VERSION"_linux.run"
-        sudo sh cuda_$CUDA_VERSION"_linux.run"
+        if [ $? -ne 0 ]; then
+            echo "CUDA 下载失败，请检查链接是否有效。"
+            return
+        fi
+        if type sudo > /dev/null 2>&1; then
+            sudo sh cuda_$CUDA_VERSION"_linux.run"
+        else
+            echo "未找到 sudo 命令，请以 root 用户运行此脚本。"
+            return
+        fi
         export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}
         export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
     fi
@@ -22,7 +32,9 @@ function install_cuda {
 # 安装 Python 和 PyTorch
 function install_python_pytorch {
     echo "---------检查并处理 Python 和 PyTorch 的安装--------"
-    source ~/anaconda3/etc/profile.d/conda.sh  # 确保 conda 命令可用
+    source ~/miniconda3/etc/profile.d/conda.sh  # 确保 conda 命令可用
+    conda init bash
+    source ~/.bashrc
     echo "当前的 Conda 环境列表："
     conda env list
     echo "是否需要创建新的 Conda 环境？(yes/no)"
@@ -52,8 +64,8 @@ function check_brew {
         read install_brew
         if [ "$install_brew" = "yes" ]; then
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
-            source ~/.bash_profile
+            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             echo "Homebrew 安装完成。"
         fi
     fi
