@@ -30,7 +30,7 @@ function install_python_pytorch {
     if [ "$create_env" = "yes" ]; then
         echo "输入新环境的名称（默认为 'agent4rec'）："
         read env_name
-        env_name=${env_ame:-agent4rec}  # 如果未输入名称，则默认为 'agent4rec'
+        env_name=${env_name:-agent4rec}  # 如果未输入名称，则默认为 'agent4rec'
         conda create -n $env_name python=$PYTHON_VERSION -y
         conda activate $env_name
     else
