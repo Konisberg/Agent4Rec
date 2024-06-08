@@ -1,46 +1,57 @@
+#!/bin/bash
+
 CUDA_VERSION="11.7"
 
-# 检查当前的 CUDA 版本
+# Check the current CUDA version
 function check_cuda_version {
-    echo "---------检查当前的 CUDA 版本--------"
+    echo "---------Checking the current CUDA version--------"
     if command -v nvidia-smi > /dev/null 2>&1; then
         nvidia-smi
     else
-        echo "nvidia-smi 未找到，请检查 NVIDIA 驱动是否已安装。"
+        echo "nvidia-smi not found, please check if the NVIDIA driver is installed."
     fi
 
     if command -v nvcc > /dev/null 2>&1; then
         nvcc --version
         CURRENT_CUDA_VERSION=$(nvcc --version | grep "release" | awk '{print $6}' | sed 's/,//')
-        if [ "$CURRENT_CUDA_VERSION" != "$CUDA_VERSION" ]; then
-            echo "当前 CUDA 版本为 $CURRENT_CUDA_VERSION。"
-            echo "是否重新安装 CUDA $CUDA_VERSION？(yes/no)"
+        if [ "$CURRENT_CUDA_WHOLE_VERSION" != "$CUDA_VERSION" ]; then
+            echo "Current CUDA version is $CURRENT_CUDA_VERSION."
+            echo "Do you want to reinstall CUDA $CUDA_VERSION? (yes/no)"
             read reinstall_cuda
             if [ "$reinstall_cuda" = "yes" ]; then
-                sudo /usr/local/cuda-$CURRENT_CUDA_VERSION/bin/uninstall_cuda_$CURRENT_CUDA_VERSION.pl
+                echo "Uninstalling CUDA $CURRENT_CUDA_VERSION..."
+                sudo /usr/local/c->uda-$CURRENT_CUDA_VERSION/bin/cuda-uninstaller
                 install_cuda
             fi
         else
-            echo "CUDA $CUDA_VERSION 已安装。"
+            echo "CUDA $CUDA_VERSION is already installed."
         fi
     else
-        echo "nvcc 未找到，请检查 CUDA 是否已安装。"
-        install_cuda
+        echo "nvcc not found, please check if CUDA is installed."
+        install	cuda
     fi
 }
 
-# 安装 CUDA
+# Install CUDA
 function install_cuda {
-    echo "---------检查并安装 CUDA $CUDA_VERSION--------"
+    echo "---------Checking and installing CUDA $CUDA_VERSION--------"
+    # Using the network installer instead of the local runfile for better management
+    CUDA_REPO_PKG="cuda-repo-ubuntu$(lsb_release -sr | cut -d. -f1)04_${CUDA_VERSION}_amd64.deb"
+    CUDA_URL="http://developer.download.nvidia.com/compute/cuda/repos/ubuntu$(lsb_release -sr | cut -d. -f1)04/x86_64/${CUDA_REPO_PKG}"
 
-    wget https://developer.nvidia.com/cuda-11-7-0-download-archive/cuda_${CUDA_VERSION}_linux.run -O cuda_${CUDA_VERSION}_linux.run
+    wget ${CUDA_URL} -O ${CUDA_REPO_PKG}
 
     if [ $? -eq 0 ]; then
-        sudo sh cuda_${CUDA_VERSION}_linux.run
-        export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}
-        export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+        sudo dpkg -i ${CUDA_REPO_PKG}
+        sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu$(lsb_release -sr | cut -d. -f1)04/x86_64/7fa2af80.pub
+        sudo apt-get update
+        sudo apt-get install cuda-$CUDA_VERSION
+
+        echo 'export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}' >> ~/.bashrc
+        echo 'export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_FEAST}}' >> ~/.bashrc
+        source ~/.bashrc
     else
-        echo "CUDA 下载失败，请检查链接是否有效。"
+        echo "Failed to download CUDA. Please check the URL and your internet connection."
     fi
 }
 
