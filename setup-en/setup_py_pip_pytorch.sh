@@ -1,56 +1,64 @@
 #!/bin/bash
 
-# 定义所需的版本信息
+# Define the required version information
 PYTHON_VERSION="3.9.12"
 PYTORCH_VERSION="1.13.1+cu117"
 
-# 安装 Python 和 PyTorch
+# Install Python and PyTorch
 function install_python_pytorch {
-    echo "---------检查并处理 Python 和 PyTorch 的安装--------"
-    source ~/miniconda3/etc/profile.d/conda.sh  # 确保 conda 命令可用
+    echo "---------Checking and handling the installation of Python and PyTorch--------"
+    # Ensure the Conda command is available
+    source ~/miniconda3/etc/profile.d/conda.sh
     conda init bash
     source ~/.bashrc
-    echo "当前的 Conda 环境列表："
+    
+    echo "Current list of Conda environments:"
     conda env list
-    echo "是否需要创建新的 Conda 环境？(yes/no)"
+    
+    echo "Do you need to create a new Conda environment? (yes/no)"
     read create_env
-    if [ "$create_env" = "yes" ]; then
-        echo "输入新环境的名称（默认为 'agent4rec'）："
+    
+    if [ "$create_attr" = "yes" ]; then
+        echo "Enter the name of the new environment (default is 'agent4rec'):"
         read env_name
-        env_name=${env_name:-agent4rec}  # 如果未输入名称，则默认为 'agent4rec'
+        # Use 'agent4rec' as the default if no name is entered
+        env_name=${env_name:-agent4rec}
         conda create -n $env_name python=$PYTHON_VERSION -y
         conda activate $env_name
     else
-        echo "请输入要激活的环境名称："
+        echo "Please enter the name of the environment to activate:"
         read env_name
         conda activate $env_name
     fi
+    
+    # Install PyTorch and related libraries
     pip install torch==$PYTORCH_VERSION torchvision==0.14.1+cu117 torchaudio==0.13.1 -f https://download.pytorch.org/whl/torch_stable.html
 }
 
-# 检查 pip 是否安装，并尝试升级
+# Check if pip is installed and attempt to upgrade
 function check_pip {
-    echo "---------检查并处理 pip 的安装与版本--------"
+    echo "---------Checking and handling the installation and version of pip--------"
     if type pip > /dev/null 2>&1; then
-        echo "pip 已安装，版本信息如下："
+        echo "pip is installed, version information as follows:"
         pip --version
     else
-        echo "pip 未安装。是否现在安装最新版本的 pip？(yes/no)"
+        echo "pip is not installed. Install the latest version of pip now? (yes/no)"
         read install_pip
-        if [ "$install_pip" = "yes" ];then
+        if [ "$install_pip" = "yes" ]; then
             if type python > /dev/null 2>&1; then
                 python -m ensurepip
                 pip install --upgrade pip
-                echo "pip 安装并升级完成。"
+                echo "pip has been installed and upgraded."
             else
-                echo "Python 未安装，无法安装 pip。"
+                echo "Python is not installed, unable to install pip."
             fi
         fi
     fi
 }
 
-# 执行所有检查和安装
+# Execute all checks and installations
+echo "Starting to configure the environment and install necessary tools (python, pip, pytorch)..."
 install_python_pytorch
 check_pip
 
-echo "环境配置和工具检查完成。"
+echo "Environment setup and tool checks are complete."
