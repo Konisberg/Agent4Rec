@@ -5,23 +5,31 @@ PYTHON_VERSION="3.9.12"
 PYTORCH_VERSION="1.13.1+cu117"
 CUDA_VERSION="11.7"
 
-# 安装 CUDA
-function install_cuda {
-    echo "---------检查并安装 CUDA $CUDA_VERSION--------"
-    if nvcc --version | grep -q "Cuda compilation tools, release $CUDA_VERSION"; then
-        echo "CUDA $CUDA_VERSION 已安装。"
+# 检查当前的 CUDA 版本
+function check_cuda_version {
+    echo "---------检查当前的 CUDA 版本--------"
+    if command -v nvcc > /dev/null 2>&1; then
+        nvcc --version
     else
-        echo "安装 CUDA $CUDA_version..."
-        wget https://developer.download.nvidia.com/compute/cuda/$CUDA_VERSION/local_installers/cuda_${CUDA_VERSION}_linux.run -O cuda_${CUDA_VERSION}_linux.run
-        if [ $? -eq 0 ]; then
-            sudo sh cuda_${CUDA_VERSION}_linux.run
-            export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}
-            export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-        else
-            echo "CUDA 下载失败，请检查链接是否有效。"
-        fi
+        echo "nvcc 未找到，请检查 CUDA 是否已安装。"
+    fi
+
+    if [ -f /usr/local/cuda/version.txt ]; then
+        echo "CUDA 版本文件内容："
+        cat /usr/local/cuda/version.txt
+    else
+        echo "未找到 CUDA 版本文件。"
+    fi
+
+    if command -v nvidia-smi > /dev/null 2>&1; then
+        nvidia-smi | grep "CUDA Version"
+    else
+        echo "nvidia-smi 未找到，请检查 NVIDIA 驱动是否已安装。"
     fi
 }
+
+# 执行检查
+check_cuda_version
 
 
 # 安装 Python 和 PyTorch
