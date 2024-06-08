@@ -4,7 +4,6 @@
 PYTHON_VERSION="3.9.12"
 PYTORCH_VERSION="1.13.1+cu117"
 
-
 # 安装 Python 和 PyTorch
 function install_python_pytorch {
     echo "---------检查并处理 Python 和 PyTorch 的安装--------"
