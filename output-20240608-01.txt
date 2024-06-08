@@ -1,0 +1,141 @@
+(agent4rec) root@autodl-container-763447a3ef-7b2cca9e:~/Agent4Rec# python main.py 
+============================
+recommenders/weights/ml-1m/LightGCN/Saved
+Evaluate model with cpp
+no special dataset
+n_users:  1000
+n_items:  3292
+finish loading data
+AbstractModel
+finish loading adjacency matrix
+/root/miniconda3/envs/agent4rec/lib/python3.9/site-packages/torch/cuda/__init__.py:497: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+finish generating recommender
+loading checkpoint
+=> Successfully restored checkpoint (trained for 349 epochs)
+Avatar 0 is initialized with memory
+Time cost: 0.0006506443023681641s
+Avatar 1 is initialized with memory
+Time cost: 0.00025343894958496094s
+Avatar 2 is initialized with memory
+Time cost: 0.0002162456512451172s
+nodrop? False
+0it [00:00, ?it/s]finish recommend one batch 0
+1it [00:00,  1.99it/s]
+finish generating score matrix
+finish get full rankings
+global start time 1717837627.4765353
+<- Beetlejuice (1988) -> <- History ratings: 3.57 -> <- Summary: A recently deceased couple hires a mischievous ghost to scare away the new inhabitants of their home. ->
+<- Fish Called Wanda, A (1988) -> <- History ratings: 3.97 -> <- Summary: A chaotic heist involving a diamond, a seductive femme fatale, and a bumbling gang leads to hilarious mishaps and unexpected alliances. ->
+<- Splash (1984) -> <- History ratings: 3.43 -> <- Summary: A man falls in love with a mysterious woman who is secretly a mermaid. ->
+<- Little Shop of Horrors (1986) -> <- History ratings: 3.33 -> <- Summary: A nerdy florist discovers a man-eating plant from outer space that brings him fame and fortune, but also threatens his love life and the entire city. ->
+
+<- Babe (1995) -> <- History ratings: 3.89 -> <- Summary: A lovable piglet named Babe defies expectations and becomes a champion sheepherder. ->
+<- Aladdin (1992) -> <- History ratings: 3.79 -> <- Summary: A street urchin discovers a magical lamp containing a genie who grants him three wishes, leading to a thrilling adventure filled with love, danger, and self-discovery. ->
+<- Shakespeare in Love (1998) -> <- History ratings: 4.13 -> <- Summary: A passionate affair between a young playwright and a noblewoman inspires the creation of one of Shakespeare's most famous plays. ->
+<- Groundhog Day (1993) -> <- History ratings: 3.95 -> <- Summary: A man finds himself trapped in a time loop, reliving the same day over and over again, until he learns to appreciate life and love. ->
+
+<- Shawshank Redemption, The (1994) -> <- History ratings: 4.55 -> <- Summary: A man's journey of hope and friendship unfolds within the confines of a prison. ->
+<- Saving Private Ryan (1998) -> <- History ratings: 4.34 -> <- Summary: A group of soldiers embark on a dangerous mission to find and bring home a missing soldier during World War II. ->
+<- English Patient, The (1996) -> <- History ratings: 3.61 -> <- Summary: A passionate love affair unfolds amidst the chaos of World War II, leaving lasting scars on the hearts of those involved. ->
+<- Forrest Gump (1994) -> <- History ratings: 4.09 -> <- Summary: A simple-minded man experiences extraordinary adventures and unwittingly influences major historical events in this heartwarming and iconic film. ->
+
+
+
+
+^Z
+[1]+  Stopped                 python main.py
+(agent4rec) root@autodl-container-763447a3ef-7b2cca9e:~/Agent4Rec# python main.py --simulation_name MyExp --modeltype MF --n_avatars 10 --max_pages 5 --items_per_page 4 --execution_mode parallel
+============================
+recommenders/weights/ml-1m/MF/Saved
+Evaluate model with cpp
+no special dataset
+n_users:  1000
+n_items:  3292
+finish loading data
+AbstractModel
+finish loading adjacency matrix
+/root/miniconda3/envs/agent4rec/lib/python3.9/site-packages/torch/cuda/__init__.py:497: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+finish generating recommender
+loading checkpoint
+=> Successfully restored checkpoint (trained for 84 epochs)
+Avatar 0 is initialized with memory
+Time cost: 0.0005002021789550781s
+Avatar 1 is initialized with memory
+Time cost: 0.0002474784851074219s
+Avatar 2 is initialized with memory
+Time cost: 0.00023746490478515625s
+Avatar 3 is initialized with memory
+Time cost: 0.0003733634948730469s
+Avatar 4 is initialized with memory
+Time cost: 0.00023436546325683594s
+Avatar 5 is initialized with memory
+Time cost: 0.00021386146545410156s
+Avatar 6 is initialized with memory
+Time cost: 0.00020837783813476562s
+Avatar 7 is initialized with memory
+Time cost: 0.0002079010009765625s
+Avatar 8 is initialized with memory
+Time cost: 0.00021386146545410156s
+Avatar 9 is initialized with memory
+Time cost: 0.00021600723266601562s
+nodrop? False
+0it [00:00, ?it/s]finish recommend one batch 0
+1it [00:00,  2.33it/s]
+finish generating score matrix
+finish get full rankings
+global start time 1717837661.2773404
+<- Graduate, The (1967) -> <- History ratings: 4.25 -> <- Summary: A young man's affair with an older woman leads to a series of unexpected events and self-discovery. ->
+<- Beetlejuice (1988) -> <- History ratings: 3.57 -> <- Summary: A recently deceased couple hires a mischievous ghost to scare away the new inhabitants of their home. ->
+<- Mary Poppins (1964) -> <- History ratings: 3.89 -> <- Summary: A magical nanny brings joy and adventure to a troubled family in London. ->
+<- Casablanca (1942) -> <- History ratings: 4.41 -> <- Summary: A love triangle unfolds in the backdrop of World War II as an American expatriate must choose between his own happiness and helping a resistance leader escape Casablanca. ->
+
+<- Annie Hall (1977) -> <- History ratings: 4.14 -> <- Summary: A neurotic comedian reflects on his failed relationships and explores the complexities of love and life in this iconic romantic comedy. ->
+<- Schindler's List (1993) -> <- History ratings: 4.51 -> <- Summary: A German businessman saves over a thousand Jewish lives during the Holocaust by employing them in his factories. ->
+<- Chinatown (1974) -> <- History ratings: 4.34 -> <- Summary: A private detective uncovers a web of corruption and deceit in 1930s Los Angeles. ->
+<- Star Wars: Episode V - The Empire Strikes Back (1980) -> <- History ratings: 4.29 -> <- Summary: Rebel forces face off against the powerful Empire in a thrilling battle for the galaxy's fate. ->
+
+<- Schindler's List (1993) -> <- History ratings: 4.51 -> <- Summary: A German businessman saves over a thousand Jewish lives during the Holocaust by employing them in his factories. ->
+<- Fargo (1996) -> <- History ratings: 4.25 -> <- Summary: A botched kidnapping scheme in a small Minnesota town leads to a web of deception and murder. ->
+<- Terminator, The (1984) -> <- History ratings: 4.15 -> <- Summary: A relentless cyborg assassin is sent back in time to kill a woman whose unborn son will lead the resistance against machines in a post-apocalyptic future. ->
+<- Star Wars: Episode IV - A New Hope (1977) -> <- History ratings: 4.45 -> <- Summary: A group of rebels embark on a mission to destroy a powerful space station and bring hope to the galaxy. ->
+
+<- Sixth Sense, The (1999) -> <- History ratings: 4.41 -> <- Summary: A troubled child psychologist helps a young boy who claims to see dead people. ->
+<- American Beauty (1999) -> <- History ratings: 4.32 -> <- Summary: A suburban man's midlife crisis leads him on a journey of self-discovery and liberation. ->
+<- North by Northwest (1959) -> <- History ratings: 4.38 -> <- Summary: A man is mistaken for a government agent and becomes entangled in a web of espionage and danger. ->
+<- Being John Malkovich (1999) -> <- History ratings: 4.13 -> <- Summary: A puppeteer discovers a portal that leads into the mind of actor John Malkovich. ->
+
+<- Godfather: Part II, The (1974) -> <- History ratings: 4.36 -> <- Summary: A gripping tale of power, family, and loyalty unfolds as a young Vito Corleone rises to become the Godfather while his son Michael struggles to maintain the family's empire. ->
+<- Godfather, The (1972) -> <- History ratings: 4.52 -> <- Summary: A powerful mafia family's patriarch struggles to maintain control amidst a web of violence, betrayal, and loyalty. ->
+<- Citizen Kane (1941) -> <- History ratings: 4.39 -> <- Summary: A wealthy newspaper tycoon's rise to power and subsequent downfall is explored through the investigation of his dying words. ->
+<- Amadeus (1984) -> <- History ratings: 4.25 -> <- Summary: A tale of jealousy and obsession unfolds as a mediocre composer becomes consumed by his rivalry with the brilliant Wolfgang Amadeus Mozart. ->
+
+<- X-Men (2000) -> <- History ratings: 3.82 -> <- Summary: A group of mutants with extraordinary powers must come together to save humanity from a powerful mutant bent on world domination. ->
+<- Lethal Weapon 3 (1992) -> <- History ratings: 3.25 -> <- Summary: A seasoned detective and his reckless partner team up to take down a former cop turned arms dealer, facing explosive action and unexpected alliances. ->
+<- Indiana Jones and the Last Crusade (1989) -> <- History ratings: 4.13 -> <- Summary: A daring archaeologist embarks on a perilous quest to find the Holy Grail and save his father from the clutches of the Nazis. ->
+<- Lethal Weapon (1987) -> <- History ratings: 3.89 -> <- Summary: A mismatched pair of detectives must put aside their differences to take down a dangerous drug cartel. ->
+
+<- Star Wars: Episode IV - A New Hope (1977) -> <- History ratings: 4.45 -> <- Summary: A group of rebels embark on a mission to destroy a powerful space station and bring hope to the galaxy. ->
+<- Babe (1995) -> <- History ratings: 3.89 -> <- Summary: A lovable piglet named Babe defies expectations and becomes a champion sheepherder. ->
+<- Jungle Book, The (1967) -> <- History ratings: 3.82 -> <- Summary: A young boy raised by wolves embarks on a thrilling adventure through the jungle with his animal friends. ->
+<- Shakespeare in Love (1998) -> <- History ratings: 4.13 -> <- Summary: A passionate affair between a young playwright and a noblewoman inspires the creation of one of Shakespeare's most famous plays. ->
+
+<- Shawshank Redemption, The (1994) -> <- History ratings: 4.55 -> <- Summary: A man's journey of hope and friendship unfolds within the confines of a prison. ->
+<- Schindler's List (1993) -> <- History ratings: 4.51 -> <- Summary: A German businessman saves over a thousand Jewish lives during the Holocaust by employing them in his factories. ->
+<- Forrest Gump (1994) -> <- History ratings: 4.09 -> <- Summary: A simple-minded man experiences extraordinary adventures and unwittingly influences major historical events in this heartwarming and iconic film. ->
+<- Babe (1995) -> <- History ratings: 3.89 -> <- Summary: A lovable piglet named Babe defies expectations and becomes a champion sheepherder. ->
+
+<- GoodFellas (1990) -> <- History ratings: 4.28 -> <- Summary: A young man's rise in the mob world leads to a life of crime, violence, and betrayal. ->
+<- Life Is Beautiful (La Vita ï¿½ bella) (1997) -> <- History ratings: 4.33 -> <- Summary: A father uses his imagination to protect his son from the horrors of a concentration camp during World War II. ->
+<- Pulp Fiction (1994) -> <- History ratings: 4.28 -> <- Summary: A thrilling and non-linear crime film that weaves together multiple interconnected stories of violence, redemption, and dark humor. ->
+<- Shawshank Redemption, The (1994) -> <- History ratings: 4.55 -> <- Summary: A man's journey of hope and friendship unfolds within the confines of a prison. ->
+
+<- Forrest Gump (1994) -> <- History ratings: 4.09 -> <- Summary: A simple-minded man experiences extraordinary adventures and unwittingly influences major historical events in this heartwarming and iconic film. ->
+<- Saving Private Ryan (1998) -> <- History ratings: 4.34 -> <- Summary: A group of soldiers embark on a dangerous mission to find and bring home a missing soldier during World War II. ->
+<- Shawshank Redemption, The (1994) -> <- History ratings: 4.55 -> <- Summary: A man's journey of hope and friendship unfolds within the confines of a prison. ->
+<- As Good As It Gets (1997) -> <- History ratings: 3.95 -> <- Summary: A misanthropic writer forms an unlikely bond with his gay artist neighbor and a waitress, leading to unexpected personal growth and self-discovery. ->
+
+
+
+
