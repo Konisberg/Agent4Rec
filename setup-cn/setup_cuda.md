@@ -52,6 +52,12 @@ fi
 echo "环境变量配置完成，请重新启动终端或执行 'source ~/.bashrc' 来应用更改。"
 ```
 
+或者直接使用命令：
+```bash 
+echo 'export PATH=/usr/local/cuda-11.7/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+```
+
 ### 步骤 4: 重新加载环境变量
 
 修改环境变量后，需要重新加载它们：
