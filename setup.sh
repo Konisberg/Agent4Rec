@@ -12,22 +12,17 @@ function install_cuda {
         echo "CUDA $CUDA_VERSION 已安装。"
     else
         echo "安装 CUDA $CUDA_version..."
-        # 使用有效的 CUDA 下载链接
-        wget https://developer.download.nvidia.com/compute/cuda/$CUDA_VERSION/local_installers/cuda_$CUDA_VERSION"_linux.run"
-        if [ $? -ne 0 ]; then
-            echo "CUDA 下载失败，请检查链接是否有效。"
-            return
-        fi
-        if type sudo > /dev/null 2>&1; then
-            sudo sh cuda_$CUDA_VERSION"_linux.run"
+        wget https://developer.download.nvidia.com/compute/cuda/$CUDA_VERSION/local_installers/cuda_${CUDA_VERSION}_linux.run -O cuda_${CUDA_VERSION}_linux.run
+        if [ $? -eq 0 ]; then
+            sudo sh cuda_${CUDA_VERSION}_linux.run
+            export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
         else
-            echo "未找到 sudo 命令，请以 root 用户运行此脚本。"
-            return
+            echo "CUDA 下载失败，请检查链接是否有效。"
         fi
-        export PATH=/usr/local/cuda-$CUDA_VERSION/bin${PATH:+:${PATH}}
-        export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA_VERSION/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
     fi
 }
+
 
 # 安装 Python 和 PyTorch
 function install_python_pytorch {
