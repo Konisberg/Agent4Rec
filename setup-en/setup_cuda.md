@@ -15,6 +15,8 @@ sudo apt install software-properties-common
 
 ```bash
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
+```
+```bash 
 sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
 sudo apt update
 ```
@@ -29,14 +31,27 @@ sudo apt install cuda-11-7
 
 #### 步骤 3: 配置环境变量
 
-为了能够在命令行中轻松切换CUDA版本，您需要更新您的环境变量。向您的`~/.bashrc`或`~/.profile`文件添加以下行：
+为了能够在命令行中轻松切换CUDA版本，您需要通过以下Shell脚本自动更新您的环境变量。该脚本将向您的`~/.bashrc`文件添加必要的环境变量定义：
 
 ```bash
-export PATH=/usr/local/cargo/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64:$LD_LIBRARYIPATH
+#!/bin/bash
+
+# 检测用户希望设置哪个版本的CUDA
+read -p "请输入您希望配置的CUDA版本（例如: 11.7）: " cuda_version
+
+# 添加环境变量到~/.bashrc，确保重复运行脚本不会重复添加相同的行
+if ! grep -q "export PATH=/usr/local/cargo/bin:\$PATH" ~/.bashrc; then
+    echo "export PATH=/usr/local/cargo/bin:\$PATH" >> ~/.bashrc
+fi
+
+if ! grep -q "export LD_LIBRARY_PATH=/usr/local/cuda-\$cuda_version/lib64:\$LD_LIBRARY_PATH" ~/.bashrc; then
+    echo "export LD_LIBRARY_PATH=/usr/local/cuda-\$cuda_version/lib64:\$LD_LIBRARY_PATH" >> ~/.bashrc
+fi
+
+echo "环境变量配置完成，请重新启动终端或执行 'source ~/.bashrc' 来应用更改。"
 ```
 
-您可以根据需要调整CUDA版本，通过修改环境变量中的路径来选择使用哪个版本的CUDA。
+您可以根据需要调整CUDA版本，通过修改环
 
 #### 步骤 4: 重新加载环境变量
 
