@@ -1,37 +1,63 @@
-要升级CUDA到特定版本（如CUDA 11.7），通常需要按照以下步骤操作，因为NVIDIA没有提供直接的命令行升级工具。不过，您可以通过命令行下载并安装新版本的CUDA。
+为了在Ubuntu 20.04.4 LTS上安装CUDA 11.7，同时保留已安装的CUDA 11.3，您可以参考下面的README文档。这个过程涉及添加NVIDIA官方的包仓库，然后安装CUDA 11.7，同时不会移除已安装的CUDA 11.3版本。
 
-1. **卸载当前的CUDA版本**（如果需要保留多个版本，请忽略此步骤）:
-   ```bash
-   sudo apt-get --purge remove cuda
-   ```
+### 安装CUDA 11.7（保留CUDA 11.3）
 
-2. **清理旧版本的依赖**：
-   ```bash
-   sudo apt-get autoremove
-   ```
+#### 步骤 1: 添加NVIDIA的包管理器仓库
 
-3. **添加NVIDIA的包管理器仓库**（如果之前没有添加过的话）：
-   ```bash
-   distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-   sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/$distribution/x86_64/3bf863cc.pub
-   sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/$distribution/x86_64/ /"
-   sudo apt-get update
-   ```
-
-4. **安装新版本的CUDA**（以CUDA 11.7为例）：
-   ```bash
-   sudo apt-get install cuda-11-7
-   ```
-
-这些步骤适用于使用基于Debian的系统（如Ubuntu）。如果您使用的是RedHat或Fedora等基于RPM的系统，安装命令会有所不同，使用`yum`或`dnf`代替`apt-get`。
-
-注意，在安装新版本前，请确保您的GPU驱动支持您想要安装的CUDA版本。通常，更新CUDA也需要更新NVIDIA驱动。
-
-安装完成后，您可能需要重新配置环境变量，比如：
+首先，确保您的系统已经安装了`software-properties-common`包，以便使用`add-apt-repository`命令。
 
 ```bash
-export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+sudo apt update
+sudo apt install software-properties-common
 ```
 
-这样可以确保系统使用正确版本的CUDA。
+添加NVIDIA的GPG key和仓库：
+
+```bash
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+sudo apt update
+```
+
+#### 步骤 2: 安装CUDA 11.7
+
+安装CUDA 11.7，但不卸载当前的CUDA 11.3。
+
+```bash
+sudo apt install cuda-11-7
+```
+
+#### 步骤 3: 配置环境变量
+
+为了能够在命令行中轻松切换CUDA版本，您需要更新您的环境变量。向您的`~/.bashrc`或`~/.profile`文件添加以下行：
+
+```bash
+export PATH=/usr/local/cargo/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64:$LD_LIBRARYIPATH
+```
+
+您可以根据需要调整CUDA版本，通过修改环境变量中的路径来选择使用哪个版本的CUDA。
+
+#### 步骤 4: 重新加载环境变量
+
+修改环境变量后，需要重新加载它们：
+
+```bash
+source ~/.bashrc
+```
+
+或者重新登录您的用户账户。
+
+#### 步骤 5: 验证安装
+
+验证CUDA 11.7是否安装成功：
+
+```bash
+nvcc --version
+```
+
+您应该看到CUDA 11.7的版本信息。如果您需要在两个版本之间切换，只需修改环境变量中的路径即可。
+
+#### 结束
+
+现在，您的系统上同时安装了CUDA 11.3和CUDA 11.7，您可以根据需要选择使用哪个版本。如果您有任何问题，请查阅NVIDIA的[官方文档](https://developer.nvidia.com/cuda-downloads)或联系技术支持。
